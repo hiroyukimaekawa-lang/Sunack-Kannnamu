@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カラオケスナック江南 -カンナム | 大和駅徒歩4分の大人の隠れ家</title>
+    <meta name="description" content="大和駅徒歩4分。すずらん通りで25年以上続く、昔ながらの純スナック。ママ手作りのフィリピン料理とこだわりのカラオケで、至福のひとときを。">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0a0e14;
+            --section-bg: #121820;
+            --accent-color: #d4af37; /* Gold */
+            --accent-hover: #f1c40f;
+            --text-color: #ffffff;
+            --text-muted: #cccccc;
+            --font-main: 'Noto Serif JP', serif;
+            --font-en: 'Playfair Display', serif;
+            --container-width: 1100px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: var(--font-main);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: 0.3s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title span {
+            display: block;
+            font-family: var(--font-en);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-title h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        /* Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: rgba(10, 14, 20, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 15px 0;
+            transition: 0.3s;
+        }
+
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-main);
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav ul li a {
+            font-size: 0.9rem;
+            letter-spacing: 0.05em;
+        }
+
+        nav ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .btn-insta {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        .btn-insta:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Slider */
+        #hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-slider {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .hero-slider .swiper-slide {
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-slider .swiper-slide::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content span {
+            font-family: var(--font-en);
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            letter-spacing: 0.3em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            line-height: 1.3;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.7);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            color: var(--text-color);
+            line-height: 1.8;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.5);
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 50px;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+            font-weight: 700;
+            letter-spacing: 0.15em;
+            transition: 0.3s;
+            background: transparent;
+        }
+
+        .cta-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        /* Strength */
+        #strength {
+            background-color: var(--section-bg);
+        }
+
+        .strength-item {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .strength-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .strength-img {
+            flex: 1;
+            overflow: hidden;
+            border-radius: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .strength-img img {
+            width: 100%;
+            height: 450px;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .strength-item:hover .strength-img img {
+            transform: scale(1.05);
+        }
+
+        .strength-text {
+            flex: 1;
+        }
+
+        .strength-text h3 {
+            font-size: 2.2rem;
+            margin-bottom: 25px;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .strength-text p {
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        /* Price */
+        #price .price-table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            font-size: 1.2rem;
+        }
+
+        #price th, #price td {
+            padding: 25px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: left;
+        }
+
+        #price th {
+            color: var(--accent-color);
+            width: 40%;
+            font-weight: 700;
+        }
+
+        #price .note {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+
+        /* Gallery Carousel */
+        #gallery {
+            background-color: var(--section-bg);
+            padding: 100px 0 150px;
+        }
+
+        .gallery-carousel {
+            width: 100%;
+            padding: 40px 0 60px;
+        }
+
+        .gallery-carousel .swiper-slide {
+            width: auto;
+            height: 450px;
+            opacity: 0.3;
+            transition: 0.5s;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .gallery-carousel .swiper-slide-active {
+            opacity: 1;
+            transform: scale(1.05);
+            z-index: 10;
+        }
+
+        .gallery-carousel img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .swiper-pagination-bullet {
+            background: var(--accent-color);
+        }
+
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--accent-color);
+        }
+
+        /* Access */
+        .access-flex {
+            display: flex;
+            gap: 60px;
+            align-items: flex-start;
+        }
+
+        .access-info {
+            flex: 1;
+        }
+
+        .access-info h3 {
+            font-size: 2rem;
+            margin-bottom: 35px;
+            color: var(--accent-color);
+        }
+
+        .access-info table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .access-info th, .access-info td {
+            text-align: left;
+            padding: 20px 0;
+            vertical-align: top;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .access-info th {
+            width: 140px;
+            color: var(--accent-color);
+            font-weight: 700;
+        }
+
+        .access-map {
+            flex: 1.5;
+            height: 550px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .phone-btn {
+            display: inline-block;
+            margin-top: 40px;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .phone-btn:hover {
+            color: var(--accent-hover);
+        }
+
+        .phone-btn i {
+            margin-right: 15px;
+        }
+
+        /* Footer */
+        footer {
+            padding: 120px 0 60px;
+            background-color: #000;
+            text-align: center;
+            border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .footer-logo {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            display: block;
+            font-weight: 700;
+        }
+
+        .footer-sns {
+            margin-bottom: 50px;
+        }
+
+        .footer-sns a {
+            font-size: 3rem;
+            margin: 0 25px;
+            color: var(--text-muted);
+        }
+
+        .footer-sns a:hover {
+            color: var(--accent-color);
+        }
+
+        .copyright {
+            font-size: 1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            .strength-item, .strength-item:nth-child(even) {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .strength-img img {
+                height: 350px;
+            }
+            .access-flex {
+                flex-direction: column;
+            }
+            .access-map {
+                width: 100%;
+                height: 400px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            section {
+                padding: 80px 0;
+            }
+            .section-title h2 {
+                font-size: 2.22rem;
+            }
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            .gallery-carousel .swiper-slide {
+                height: 300px;
+            }
+        }
+
+        /* Mobile Nav Active */
+        nav.active {
+            display: flex;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-color);
+            padding: 40px 20px;
+            flex-direction: column;
+            text-align: center;
+            border-bottom: 1px solid var(--accent-color);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.7);
+            z-index: 1001;
+        }
+
+        nav.active ul {
+            flex-direction: column;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <a href="#" class="logo">江南 -KANNAMU-</a>
+            <nav id="nav">
+                <ul>
+                    <li><a href="#hero">TOP</a></li>
+                    <li><a href="#strength">お店の強み</a></li>
+                    <li><a href="#price">料金</a></li>
+                    <li><a href="#gallery">ギャラリー</a></li>
+                    <li><a href="#access">アクセス</a></li>
+                    <li><a href="https://www.instagram.com/karaokesnackkannamu" target="_blank" class="btn-insta"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-btn" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </header>
+
+    <div id="hero">
+        <!-- Hero Background Slider -->
+        <div class="swiper hero-slider">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" style="background-image: url('img/line_oa_chat_260220_104618.jpg');"></div>
+                <div class="swiper-slide" style="background-image: url('img/line_oa_chat_260220_104610_group_0.jpg');"></div>
+                <div class="swiper-slide" style="background-image: url('img/line_oa_chat_260220_104620_group_0.jpg');"></div>
+            </div>
+        </div>
+        
+        <div class="hero-content reveal">
+            <span>WELCOME TO KANNAMU</span>
+            <h1>昭和レトロと人の温かさに<br>出会える、大人の隠れ家</h1>
+            <p>大和駅徒歩4分。すずらん通りで25年以上続く、昔ながらの純スナック。初めてでも入りやすい雰囲気と安心料金で、また来たくなる空間を大切にしています。</p>
+            <a href="#access" class="cta-btn">お問い合わせ・予約</a>
+        </div>
+    </div>
+
+    <section id="strength">
+        <div class="container">
+            <div class="section-title reveal">
+                <span>Our Strengths</span>
+                <h2>江南のこだわり</h2>
+            </div>
+
+            <div class="strength-item reveal">
+                <div class="strength-img">
+                    <img src="img/line_oa_chat_260220_104610_group_0.jpg" alt="老舗の安心感">
+                </div>
+                <div class="strength-text">
+                    <h3>25年以上愛され続ける安心感</h3>
+                    <p>長年地域のお客様に支えられてきた、信頼の老舗スナック。初めての方やスナックに慣れていない方でも、扉を開ければそこには落ち着いて過ごせる温かい空気感が広がっています。</p>
+                </div>
+            </div>
+
+            <div class="strength-item reveal">
+                <div class="strength-img">
+                    <img src="img/line_oa_chat_260220_104615_group_0.jpg" alt="手作り料理">
+                </div>
+                <div class="strength-text">
+                    <h3>ママ手作りのフィリピン家庭料理</h3>
+                    <p>フィリピン出身のママ・ジェニーが作るエスニック料理は、常連様からも愛される江南の看板メニュー。お酒に合う真心のこもった手料理を楽しめるのは当店ならではの魅力です。</p>
+                </div>
+            </div>
+
+            <div class="strength-item reveal">
+                <div class="strength-img">
+                    <img src="img/line_oa_chat_260220_104622.jpg" alt="カラオケ">
+                </div>
+                <div class="strength-text">
+                    <h3>音質にこだわったカラオケ</h3>
+                    <p>歌うことが好きな方に大変好評をいただいている高音質カラオケを導入しています。1,000円で歌い放題。自慢の喉を披露するもよし、仲間と盛り上がるもよし、最高の音響でお楽しみください。</p>
+                </div>
+            </div>
+
+            <div class="strength-item reveal">
+                <div class="strength-img">
+                    <img src="img/line_oa_chat_260220_104613_group_1.jpg" alt="誰でも入りやすい">
+                </div>
+                <div class="strength-text">
+                    <h3>女性でも入りやすい雰囲気</h3>
+                    <p>カップルや女子会、女性グループのお客様も多く、入りやすい明るい雰囲気が自慢です。女性のお客様お一人でも安心して楽しんでいただけます。</p>
+                </div>
+            </div>
+
+            <div class="strength-item reveal">
+                <div class="strength-img">
+                    <img src="img/line_oa_chat_260220_104613_group_4.jpg" alt="野球好き">
+                </div>
+                <div class="strength-text">
+                    <h3>野球好きも集まるお店</h3>
+                    <p>マスターは熱狂的な横浜ベイスターズファン。野球シーズンにはハマスタ観戦帰りのお客様も多く集まります。勝った日も負けた日も、お酒を片手に野球談議に花を咲かせましょう。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="price">
+        <div class="container">
+            <div class="section-title reveal">
+                <span>System & Price</span>
+                <h2>料金システム</h2>
+            </div>
+            <table class="price-table reveal">
+                <tr>
+                    <th>ドリンク</th>
+                    <td>700円〜</td>
+                </tr>
+                <tr>
+                    <th>お通し・おつまみ</th>
+                    <td>500円〜</td>
+                </tr>
+                <tr>
+                    <th>カラオケ歌い放題</th>
+                    <td>1,000円</td>
+                </tr>
+                <tr>
+                    <th>テーブルチャージ</th>
+                    <td>平日ハッピーアワー（開店〜20:00）は無料</td>
+                </tr>
+            </table>
+            <p class="note reveal">※料金は全て税込表示です。詳細はお気軽にお尋ねください。</p>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <div class="section-title reveal">
+                <span>Gallery</span>
+                <h2>店内の雰囲気</h2>
+            </div>
+        </div>
+        
+        <!-- Swiper Carousel -->
+        <div class="swiper gallery-carousel reveal">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104610_group_1.jpg" alt="Gallery 1"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104610_group_2.jpg" alt="Gallery 2"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104610_group_3.jpg" alt="Gallery 3"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104610_group_4.jpg" alt="Gallery 4"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104610_group_5.jpg" alt="Gallery 5"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104613_group_0.jpg" alt="Gallery 6"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104613_group_3.jpg" alt="Gallery 7"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104615_group_1.jpg" alt="Gallery 8"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104620_group_0.jpg" alt="Gallery 9"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104620_group_1.jpg" alt="Gallery 10"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104618.jpg" alt="Gallery 11"></div>
+                <div class="swiper-slide"><img src="img/line_oa_chat_260220_104622.jpg" alt="Gallery 12"></div>
+            </div>
+            <!-- Add Pagination & Navigation -->
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <section id="access">
+        <div class="container">
+            <div class="section-title reveal">
+                <span>Access & Info</span>
+                <h2>店舗情報</h2>
+            </div>
+            <div class="access-flex reveal">
+                <div class="access-info">
+                    <h3>カラオケスナック江南 -カンナム</h3>
+                    <table>
+                        <tr>
+                            <th>住所</th>
+                            <td>〒242-0017<br>神奈川県大和市大和東２丁目４−１６</td>
+                        </tr>
+                        <tr>
+                            <th>電話番号</th>
+                            <td>080-6459-1960</td>
+                        </tr>
+                        <tr>
+                            <th>営業時間</th>
+                            <td>17:00〜0:00（深夜0時）</td>
+                        </tr>
+                        <tr>
+                            <th>定休日</th>
+                            <td>火曜日</td>
+                        </tr>
+                        <tr>
+                            <th>アクセス</th>
+                            <td>大和駅 徒歩4分（すずらん通り内）</td>
+                        </tr>
+                    </table>
+                    <a href="tel:080-6459-1960" class="phone-btn"><i class="fas fa-phone"></i> 080-6459-1960</a>
+                    <p style="margin-top: 15px; font-size: 1.1rem; color: var(--text-muted);">※ご予約はお電話にて承っております。</p>
+                </div>
+                <div class="access-map">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3246.3478985114755!2d139.4608333!3d35.4672222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x601858888888888d%3A0x1d1d1d1d1d1d1d1d!2z44CSMjQyLTAwMTcg56We5aWI5bed55yM5aSn5ZKM5biC5aSn5ZKM5p2x77yS5LiB55uu77yU4oiS77yR77yW!5e0!3m2!1sja!2sjp!4v1710777000000!5m2!1sja!2sjp" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <span class="footer-logo">江南 -KANNAMU-</span>
+            <div class="footer-sns">
+                <a href="https://www.instagram.com/karaokesnackkannamu" target="_blank"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="copyright">© 2025 Karaoke Snack Kannamu. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        // Hero Slider Initializer
+        const heroSwiper = new Swiper('.hero-slider', {
+            loop: true,
+            effect: 'fade',
+            speed: 2500,
+            autoplay: {
+                delay: 6000,
+                disableOnInteraction: false,
+            },
+        });
+
+        // Gallery Carousel Initializer
+        const gallerySwiper = new Swiper('.gallery-carousel', {
+            loop: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            spaceBetween: 30,
+            speed: 1000,
+            autoplay: {
+                delay: 3500,
+                disableOnInteraction: false,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            breakpoints: {
+                768: {
+                    spaceBetween: 60,
+                }
+            }
+        });
+
+        // Reveal Animations on Scroll
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 150;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add("active");
+                }
+            }
+        }
+
+        window.addEventListener("scroll", reveal);
+        window.addEventListener("load", reveal);
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            var nav = document.getElementById("nav");
+            nav.classList.toggle("active");
+        }
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+                // Close menu if open
+                var nav = document.getElementById("nav");
+                if(nav.classList.contains("active")) {
+                    nav.classList.remove("active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
