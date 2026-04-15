@@ -638,6 +638,14 @@ footer {
         font-size: 1.6rem;
     }
 
+    .access-flex {
+        gap: 30px;
+    }
+
+    .access-map {
+        height: 350px;
+    }
+
     .strength-item {
         gap: 25px;
     }
